@@ -1,1 +1,2 @@
 # lwmgmt
+I tried too many VMs managment tools. They maybe very powerful but too complex, especially when you want to change it. Hence, I started to think, why can't I write a new one? Absolutely light weight. Too much parameters checking is useless and boring. Too many midware introduced, do they really take so much convenient and save programmers' time? I am afraid not always as it. Here I'd like to start a new project, to manage VMs, but take less efforts.
