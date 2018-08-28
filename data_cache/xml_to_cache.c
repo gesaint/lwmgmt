@@ -24,8 +24,9 @@ void parseAttrs(xmlNodePtr node, struct data_cache *cache) {
             xmlFree(val);
         }
         attr = attr->next; 
-        if (attr != NULL) {
+        if (attr) {
             cache->sibling = malloc_attr_cache();
+            cache = cache->sibling;
         }
     }
 
@@ -35,33 +36,43 @@ void parseAttrs(xmlNodePtr node, struct data_cache *cache) {
 void parseNode(xmlDocPtr doc, xmlNodePtr node, struct data_cache *cache) {
     xmlChar *val;
     int tmp_len;
+    if (node->type != XML_ELEMENT_NODE)
+        return;
 
-    while (node != NULL) {
-        val = xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
-        if (val != NULL) {
-            cache->name = malloc(strlen(node->name) * sizeof(char) + 1);
-            strcpy(cache->name, node->name);
-            printf("Node name is %s.\n", cache->name);
-            cache->val = malloc(strlen(val) * sizeof(char) + 1);
-            strcpy(cache->val, val);
-            printf("Node value is %s.\n", cache->val);
+    if (node->name) {
+        cache->name = malloc(strlen(node->name) * sizeof(char) + 1);
+        strcpy(cache->name, node->name);
+        printf("Node name is %s.\n", cache->name);
+    }
 
-            xmlFree(val);
-        }
-        if (node->properties) {
-            cache->prop = malloc_attr_cache();
-            parseAttrs(node, cache->prop);
-        }
+    val = xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
+    if (val != NULL) {
+        cache->val = malloc(strlen(val) * sizeof(char) + 1);
+        strcpy(cache->val, val);
+        printf("Node value is %s.\n", cache->val);
 
-        if (node->xmlChildrenNode) {
-            cache->child = malloc_node_cache();
-            parseNode(doc, node->xmlChildrenNode, cache->child);
-        }
+        xmlFree(val);
+    }
+
+    if (node->properties) {
+        cache->prop = malloc_attr_cache();
+        parseAttrs(node, cache->prop);
+    }
+
+    node = node->children;
+    if (node) {
+        cache->child = malloc_node_cache();
+        cache = cache->child;
+    }
+
+    while (node) {
+        parseNode(doc, node, cache);
 
         node = node->next;
 
-        if (node != NULL) {
+        if (node) {
             cache->sibling = malloc_node_cache();
+            cache = cache->sibling;
         }
     }
 
@@ -77,7 +88,6 @@ struct data_cache *xml_to_cache(char *xml) {
     doc = xmlParseDoc(xml);
 
     cur = xmlDocGetRootElement(doc);
-
     if (cur) {
         root = malloc_node_cache();
         parseNode(doc, cur, root);

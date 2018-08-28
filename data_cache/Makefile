@@ -2,10 +2,11 @@ CC:=gcc
 CFLAGS:=-I/usr/include/libxml2/
 CFLAGS+=-c
 LIBS:=-lxml2
-TARGET:=xml_to_cache_test
+TARGET:=data_cache_test
 DEPEND:=xml_to_cache.o
+DEPEND+=cache_to_xml.o
 DEPEND+=data_cache.o
-DEPEND+=xml_to_cache_test.o
+DEPEND+=data_cache_test.o
 
 $(TARGET):$(DEPEND)
 	$(CC) -o $@ $^ $(LIBS)

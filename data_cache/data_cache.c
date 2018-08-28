@@ -23,29 +23,25 @@ struct data_cache *malloc_attr_cache(void) {
 }
 
 void dump_cache(struct data_cache *cache) {
+    struct data_cache *idx = NULL;
+
     if (cache)  {
-        if (cache->name && cache->val) {
+        printf("Type: %d\n", cache->type);
+        printf("Name: %s\n", cache->name);
+        printf("Value: %s\n", cache->val);
+
+        idx = cache->prop;
+        while (idx) {
             printf("Type: %d\n", cache->type);
             printf("Name: %s\n", cache->name);
             printf("Value: %s\n", cache->val);
+            idx = idx->sibling;
         }
 
-        if (cache->prop) {
-            printf("===== Props =====\n");
-            dump_cache(cache->prop);
-            printf("===== End Props =====\n");
-        }
-
-        if (cache->sibling) {
-            printf("===== Siblings =====\n");
-            dump_cache(cache->sibling);
-            printf("===== End Siblings =====\n");
-        }
-
-        if (cache->child) {
-            printf("===== Children =====\n");
-            dump_cache(cache->child);
-            printf("===== End Children =====\n");
+        idx = cache->child;
+        while (idx) {
+            dump_cache(idx);
+            idx = idx->sibling;
         }
     }
 }
