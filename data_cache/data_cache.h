@@ -1,9 +1,6 @@
 #ifndef _DATA_CACHE_H
 #define _DATA_CACHE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 struct data_cache {
     char *name;
     char *val;

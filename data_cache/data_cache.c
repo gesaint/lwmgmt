@@ -24,9 +24,11 @@ struct data_cache *malloc_attr_cache(void) {
 
 void dump_cache(struct data_cache *cache) {
     if (cache)  {
-        printf("Type: %d\n", cache->type);
-        printf("Name: %s\n", cache->name);
-        printf("Value: %s\n", cache->val);
+        if (cache->name && cache->val) {
+            printf("Type: %d\n", cache->type);
+            printf("Name: %s\n", cache->name);
+            printf("Value: %s\n", cache->val);
+        }
 
         if (cache->prop) {
             printf("===== Props =====\n");

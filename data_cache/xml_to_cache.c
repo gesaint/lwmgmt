@@ -68,13 +68,13 @@ void parseNode(xmlDocPtr doc, xmlNodePtr node, struct data_cache *cache) {
     return;
 }
 
-void parseXml(char *docName) {
+struct data_cache *xml_to_cache(char *xml) {
     xmlDocPtr doc;
     xmlNodePtr cur;
     char path[MAX_PATH_LEN];
     struct data_cache *root;
 
-    doc = xmlParseFile(docName);
+    doc = xmlParseDoc(xml);
 
     cur = xmlDocGetRootElement(doc);
 
@@ -88,15 +88,5 @@ void parseXml(char *docName) {
 
     xmlFreeDoc(doc);
 
-    return;
-}
-
-int main(int argc, char **argv) {
-    char *docName;
-
-    docName = argv[1];
-
-    parseXml(docName);
-
-    return 0;
+    return root;
 }
