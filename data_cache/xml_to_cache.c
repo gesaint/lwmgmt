@@ -46,7 +46,7 @@ void parseNode(xmlDocPtr doc, xmlNodePtr node, struct data_cache *cache) {
     }
 
     val = xmlNodeListGetString(doc, node->xmlChildrenNode, 1);
-    if (val != NULL) {
+    if (val) {
         cache->val = malloc(strlen(val) * sizeof(char) + 1);
         strcpy(cache->val, val);
         printf("Node value is %s.\n", cache->val);

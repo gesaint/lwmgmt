@@ -7,6 +7,7 @@ DEPEND:=xml_to_cache.o
 DEPEND+=cache_to_xml.o
 DEPEND+=data_cache.o
 DEPEND+=data_cache_test.o
+DEPEND+=cache_to_json.o
 
 $(TARGET):$(DEPEND)
 	$(CC) -o $@ $^ $(LIBS)

@@ -3,6 +3,7 @@
 #include "xml_to_cache.h"
 #include "cache_to_xml.h"
 #include "data_cache.h"
+#include "cache_to_json.h"
  
 int main (int argc, char *argv[])
 {
@@ -11,7 +12,7 @@ int main (int argc, char *argv[])
     char *xml;
     size_t result;
     struct data_cache *cache;
-    char *output;
+    char *output, *output2;
     
     pf = fopen(argv[1], "rb" );
  
@@ -26,6 +27,9 @@ int main (int argc, char *argv[])
 
     cache = xml_to_cache(xml);
     output = cache_to_xml(cache);
+    output2 = cache_to_json(cache);
+    printf("$$$$$\n");
+    printf("%s\n", output2);
  
     fclose (pf);
     free (xml);

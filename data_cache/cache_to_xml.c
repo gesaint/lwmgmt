@@ -5,34 +5,32 @@
 #include <libxml/parser.h>
 #include "data_cache.h"
 
+void prop_to_xml(xmlNodePtr node, struct data_cache *cache) {
+    while (cache) {
+        xmlNewProp(node, BAD_CAST cache->name, BAD_CAST cache->val);
+        cache = cache->sibling;
+    }
+}
+
 void node_to_xml(xmlNodePtr node, struct data_cache *cache) {
     xmlNodePtr newNode = NULL;
     struct data_cache *idx = NULL;
 
-    if (cache) {
-        if (cache->type == 0) {
-            while (cache) {
-                printf("*cache->name:%s\n*", cache->name);
-                newNode = xmlNewChild(node, NULL, BAD_CAST cache->name, BAD_CAST cache->val);
+    while (cache) {
+        printf("*cache->name:%s\n*", cache->name);
+        newNode = xmlNewChild(node, NULL, BAD_CAST cache->name, BAD_CAST cache->val);
 
-                idx = cache->prop;
-                if (idx) {
-                    node_to_xml(newNode, idx);
-                }
-
-                idx = cache->child;
-                if (idx) {
-                    node_to_xml(newNode, idx);
-                }
-
-                cache = cache->sibling;
-            }
-        } else {
-            while (cache) {
-                xmlNewProp(node, BAD_CAST cache->name, BAD_CAST cache->val);
-                cache = cache->sibling;
-            }
+        idx = cache->prop;
+        if (idx) {
+            prop_to_xml(newNode, idx);
         }
+
+        idx = cache->child;
+        if (idx) {
+            node_to_xml(newNode, idx);
+        }
+
+        cache = cache->sibling;
     }
 }
 
