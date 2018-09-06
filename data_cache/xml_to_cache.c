@@ -70,7 +70,7 @@ void parseNode(xmlDocPtr doc, xmlNodePtr node, struct data_cache *cache) {
 
         node = node->next;
 
-        if (node) {
+        if (node && node->type == XML_ELEMENT_NODE) {
             cache->sibling = malloc_node_cache();
             cache = cache->sibling;
         }
