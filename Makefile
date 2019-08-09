@@ -1,14 +1,20 @@
-CC:=gcc
-CFLAGS+=-c
-TARGET:=lwmgmt
-DEPEND:=lwmgmt.o
+SUBDIRS = ./ext ./services ./data_cache
+ 
+.PHONY: all
+all:
+	@list='$(SUBDIRS)'; for subdir in $$list; do \
+		echo "Make in $$subdir";\
+		$(MAKE) -C $$subdir;\
+	done
 
-$(TARGET):$(DEPEND)
-	$(CC) -o $@ $^ $(LIBS)
+	$(MAKE) -f Makefile.lwmgmt
 
-%.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-
-.PHONY:clean
+.PHONY: clean
 clean:
-	rm -rf *.o $(TARGET)
+	@echo Making clean
+	@list='$(SUBDIRS)'; for subdir in $$list; do \
+		echo "Clean in $$subdir";\
+		$(MAKE) -C $$subdir clean;\
+	done
+
+	$(MAKE) clean -f Makefile.lwmgmt
