@@ -3,7 +3,7 @@
 #include <libvirt/libvirt.h>
 #include "virt_server.h"
 
-void vm_list(void)
+void vm_list(int conn)
 {
     virtDomainPtr *allDomains;
     int numDomains = 0;

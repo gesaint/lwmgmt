@@ -12,27 +12,18 @@ int main(int argc, char *argv[])
     // For debug
     int cond = 0;
 
-    conn = virConnectOpen("qemu:///system");
-    if (conn == NULL) {
-        fprintf(stderr, "Failed to open connection to qemu:///system\n");
-        return -1;
-    }
-
     // Add APIs here
     switch (cond) {
         case VM_NEW:
-            vm_new();
+            vm_new(conn);
             break;
         case VM_LIST:
-            vm_list();
+            vm_list(conn);
             break;
         default:
             fprintf(stderr, "Failed to open connection to qemu:///system\n");
     }
 
-    if (conn != NULL) {
-        virConnectClose(conn);
-    }
 
     return 0;
 }

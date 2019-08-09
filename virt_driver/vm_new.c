@@ -5,10 +5,10 @@
 #include "virt_server.h"
 #include "vm_new.h"
 
-int vm_new(void)
+int vm_new(int conn)
 {
-    /*
     char *buff = NULL;
+    virDomainPtr dom = NULL;
     // TODO: Generate XML
     // ...
 
@@ -29,7 +29,6 @@ int vm_new(void)
 
         return -1;
     }
-    */
 
     return 0;
 }
