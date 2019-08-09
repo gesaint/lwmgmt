@@ -13,3 +13,4 @@ $(TARGET):$(DEPEND)
 .PHONY:clean
 clean:
 	rm -rf *.o $(TARGET)
+	rm -rf lib/exec_files.o

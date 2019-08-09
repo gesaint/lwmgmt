@@ -14,7 +14,13 @@ int main (int argc, char *argv[])
     struct data_cache *cache;
     char *output, *output2;
     
-    pf = fopen(argv[1], "rb" );
+    if (argv[1]) {
+        pf = fopen(argv[1], "rb" );
+    } else {
+        printf("Usage: %s <xml file name>\n", argv[0]);
+
+        return -1;
+    }
  
     fseek(pf, 0 , SEEK_END);
     len = ftell(pf);
