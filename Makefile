@@ -1,4 +1,4 @@
-SUBDIRS = ./ext ./services ./data_cache
+SUBDIRS = ./ext ./services ./data_cache ./tcp_server
  
 .PHONY: all
 all:

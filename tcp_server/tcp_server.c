@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <unistd.h>
 
 #define BUFSIZE 4096
 
@@ -14,7 +15,7 @@ int main(int argc, char *argv[])
     int len;
     struct sockaddr_in my_addr;
     struct sockaddr_in remote_addr;
-    int sin_size;
+    socklen_t sin_size;
     char buf[BUFSIZE];
     memset(&my_addr, 0, sizeof(my_addr));
     my_addr.sin_family = AF_INET;
