@@ -1,14 +1,14 @@
-CC:=gcc
-CFLAGS+=-c
-TARGET:=init
-DEPEND:=init.o
-
-$(TARGET):$(DEPEND)
-	$(CC) -o $@ $^ $(LIBS)
-
-%.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-
-.PHONY:clean
+SOURCE = $(wildcard *.c)
+TARGETS = $(patsubst %.c, %, $(SOURCE))
+ 
+CC = gcc
+CFLAGS = -Wall -g
+ 
+all:$(TARGETS)
+ 
+$(TARGETS):%:%.c
+	$(CC) $< $(CFLAGS) -o $@
+ 
+.PHONY:clean all
 clean:
-	rm -rf *.o $(TARGET)
+	rm -rf *.o $(TARGETS)
