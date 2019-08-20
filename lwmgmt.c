@@ -21,7 +21,7 @@ int main(void)
 
     // Load services
     strcpy(service_path, base_path);
-    strcat(service_path, "/services");
+    strcat(service_path, "/service");
     exec_files(service_path);
 
     // Load extensions
