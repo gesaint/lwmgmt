@@ -2,7 +2,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include "log.h"
-// # include "write_data_to_file.h"
+
+extern int write_data_to_file(const char *path, char *str);
 
 void lw_init(void)
 {
