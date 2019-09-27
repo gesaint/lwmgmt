@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libvirt/libvirt.h>
-#include "virt_server.h"
 
-void active_vm_list(int conn)
+void active_vm_list(virConnectPtr conn)
 {
     int i;
     int numDomains;
@@ -20,4 +19,23 @@ void active_vm_list(int conn)
     }
 
     free(activeDomains);
+}
+
+void inactive_vm_list(virConnectPtr conn)
+{
+    int i;
+    int numDomains;
+    char **inactiveDomains;
+
+    numDomains = virConnectNumOfDefinedDomains(conn);
+
+    inactiveDomains = malloc(sizeof(char *) * numDomains);
+    numDomains = virConnectListDefinedDomains(conn, inactiveDomains, numDomains);
+
+    printf("Inactive domain names:\n");
+    for (i = 0 ; i < numDomains ; i++) {
+        printf("  %s\n", inactiveDomains[i]);
+        free(inactiveDomains[i]);
+    }
+    free(inactiveDomains);
 }
