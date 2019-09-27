@@ -5,6 +5,7 @@ TARGET:=virt_test
 DEPEND:=virt_test.o
 DEPEND+=virt_conn.o
 DEPEND+=vm_list.o
+DEPEND+=vm_info.o
 
 $(TARGET):$(DEPEND)
 	$(CC) -o $@ $^ $(LIBS)
