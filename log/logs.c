@@ -2,7 +2,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include "logs.h"
-# include "../lib/write_data_to_file.h"
+// # include "write_data_to_file.h"
 
 void lw_init(void)
 {

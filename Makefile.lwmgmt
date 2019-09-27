@@ -1,14 +1,15 @@
 CC:=gcc
+LIBS=-lexec_files
+LIB_PATH=-L/root/lwmgmt/lib
 CFLAGS+=-c
 TARGET:=lwmgmt
 DEPEND:=lwmgmt.o
-DEPEND+=lib/exec_files.o
 
 $(TARGET):$(DEPEND)
-	$(CC) -o $@ $^ $(LIBS)
+	$(CC) $(LIB_PATH) -o $@ $^ $(LIBS)
 
 %.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(LIB_PATH) -o $@ $^ $(LIBS)
 
 .PHONY:clean
 clean:
