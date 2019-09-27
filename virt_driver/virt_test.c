@@ -33,6 +33,12 @@ int main(int argc, char *argv[])
     vm_new(conn, xml);
     // Verify
     inactive_vm_list(conn);
+    // start domain
+    vm_start(conn, "test2");
+    // Verify
+    active_vm_list(conn);
+    // Shutdown domain
+    vm_shutdown(conn, "test2");
     // Delete domain
     vm_delete(conn, "test2");
     // Verify
