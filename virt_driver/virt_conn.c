@@ -3,14 +3,19 @@
 #include <string.h>
 #include <assert.h>
 #include <libvirt/libvirt.h>
+#include <string.h>
 #include "virt_conn.h"
 
-virConnectPtr open_conn(void)
+virConnectPtr open_conn(char *ip)
 {
     virConnectPtr conn = NULL;
-    conn = virConnectOpen("qemu:///system");
+    char uri[1024];
+    strcpy(uri, "qemu+tcp://");
+    strcat(uri, ip);
+    strcat(uri, "/system");
+    conn = virConnectOpen(uri);
     if (conn == NULL) {
-        fprintf(stderr, "Failed to open connection to qemu:///system\n");
+        fprintf(stderr, "Failed to open connection to %s\n", uri);
         return NULL;
     }
 

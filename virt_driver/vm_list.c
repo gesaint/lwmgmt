@@ -3,36 +3,21 @@
 #include <libvirt/libvirt.h>
 #include "virt_server.h"
 
-void vm_list(int conn)
+void active_vm_list(int conn)
 {
-    virtDomainPtr *allDomains;
-    int numDomains = 0;
-    int numActiveDomains, numInactiveDomains;
-    char *inactiveDomains;
-    int *activeDomains;
     int i;
+    int numDomains;
+    int *activeDomains;
 
-    numActiveDomains = virConnectNumOfDomains(conn);
-    numInactiveDomains = virConnectNumOfDefinedDomains(conn);
+    numDomains = virConnectNumOfDomains(conn);
 
-    allDomains = malloc(sizeof(virDomainPtr) * numActiveDomains + numInactiveDomains);
-    inactiveDomains = malloc(sizeof(char *) * numActiveDomains);
-    activeDomains = malloc(sizeof(int) * numInactiveDomains);
+    activeDomains = malloc(sizeof(int) * numDomains);
+    numDomains = virConnectListDomains(conn, activeDomains, numDomains);
 
-    numActiveDomains = virConnectListDomains(conn, activeDomains, numActiveDomains);
-    numInactiveDomains = virConnectListDomains(conn, inactiveDomains, numInactiveDomains);
-
-    for (i = 0; i < numActiveDomains; i++) {
-        allDomains[numDomains] = virDomainLookupByID(activeDomains[i]);
-        numDomains++;
-    }
-
-    for (i = 0; i < numInactiveDomains; i++) {
-        allDomains[numDomains] = virDomainLookupByName(inactiveDomains[i]);
-        free(inactiveDomains[i]);
-        numDomains++;
+    printf("Active domain IDs:\n");
+    for (i = 0 ; i < numDomains ; i++) {
+        printf("  %d\n", activeDomains[i]);
     }
 
     free(activeDomains);
-    free(inactiveDomains);
 }
