@@ -3,7 +3,7 @@
 #include <libvirt/libvirt.h>
 #include <libvirt/virterror.h>
 
-int vm_new(int conn, const char *xml)
+int vm_new(virConnectPtr conn, const char *xml)
 {
     virDomainPtr dom = NULL;
 

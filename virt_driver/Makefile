@@ -1,17 +1,19 @@
 CC:=gcc
 CFLAGS+=-c
-LIBS:=-lvirt
+LIBS:=-lvirt -lread_data_from_file
+LIB_DIR:=-L/root/lwmgmt/lib
 TARGET:=virt_test
 DEPEND:=virt_test.o
 DEPEND+=virt_conn.o
 DEPEND+=vm_list.o
 DEPEND+=vm_info.o
+DEPEND+=vm_new.o
 
 $(TARGET):$(DEPEND)
-	$(CC) -o $@ $^ $(LIBS)
+	$(CC) $(LIB_DIR) -o $@ $^ $(LIBS)
 
 %.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
 
 .PHONY:clean
 clean:
