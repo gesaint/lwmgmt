@@ -1,11 +1,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "logs.h"
+# include "log.h"
 
 int main(int argc, char *argv[])
 {
-    // Init logs file
+    // Init log file
     lw_init();
     sleep(1);
 

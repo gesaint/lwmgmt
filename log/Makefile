@@ -3,7 +3,7 @@ LIBS=-lwrite_data_to_file
 LIB_DIR:=-L/root/lwmgmt/lib
 CFLAGS=-c -Wall
 TARGET:=example
-DEPEND+=logs.o
+DEPEND+=log.o
 DEPEND+=example.o
 
 $(TARGET):$(DEPEND)
