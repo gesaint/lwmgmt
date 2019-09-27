@@ -8,6 +8,7 @@ DEPEND+=virt_conn.o
 DEPEND+=vm_list.o
 DEPEND+=vm_info.o
 DEPEND+=vm_new.o
+DEPEND+=vm_delete.o
 
 $(TARGET):$(DEPEND)
 	$(CC) $(LIB_DIR) -o $@ $^ $(LIBS)

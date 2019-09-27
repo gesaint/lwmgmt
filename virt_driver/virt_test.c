@@ -7,6 +7,7 @@
 #include "vm_list.h"
 #include "vm_info.h"
 #include "vm_new.h"
+#include "vm_delete.h"
 
 extern char *read_data_from_file(const char *path);
 
@@ -30,6 +31,10 @@ int main(int argc, char *argv[])
     // Define domain
     xml = read_data_from_file("/root/test2.xml");
     vm_new(conn, xml);
+    // Verify
+    inactive_vm_list(conn);
+    // Delete domain
+    vm_delete(conn, "test2");
     // Verify
     inactive_vm_list(conn);
     // Disconnect
