@@ -8,6 +8,7 @@
 #include "vm_info.h"
 #include "vm_new.h"
 #include "vm_delete.h"
+#include "vm_shutdown.h"
 
 extern char *read_data_from_file(const char *path);
 

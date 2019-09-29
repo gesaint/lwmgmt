@@ -10,6 +10,7 @@ DEPEND+=vm_info.o
 DEPEND+=vm_new.o
 DEPEND+=vm_delete.o
 DEPEND+=vm_start.o
+DEPEND+=vm_shutdown.o
 
 $(TARGET):$(DEPEND)
 	$(CC) $(LIB_DIR) -o $@ $^ $(LIBS)
