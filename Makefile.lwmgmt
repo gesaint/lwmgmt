@@ -1,5 +1,5 @@
 CC:=gcc
-LIBS=-lexec_files
+LIBS=-lexec_files -lfind_files
 LIB_PATH=-L/root/lwmgmt/lib
 CFLAGS+=-c
 TARGET:=lwmgmt
