@@ -1,4 +1,4 @@
-SUBDIRS = ./lib ./ext ./service ./data_cache ./tcp_server ./virt_driver ./node ./log
+SUBDIRS = ./lib ./extension ./service ./data_cache ./tcp_server ./virt_driver ./node ./log
  
 .PHONY: all
 all:

@@ -26,7 +26,7 @@ int main(void)
 
     // Load extensions
     strcpy(ext_path, base_path);
-    strcat(ext_path, "/ext");
+    strcat(ext_path, "/extension");
     exec_files(ext_path);
 
     
