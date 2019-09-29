@@ -3,6 +3,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <pthread.h>
 #include "exec_files.h"
 
 int exec_files(char *base_path)
@@ -11,6 +12,8 @@ int exec_files(char *base_path)
     struct dirent *ptr;
     char base[4096];
     char cmd[4096];
+    pthread_t id;
+    int ret;
 
     if ((dir=opendir(base_path)) == NULL)
     {
@@ -28,7 +31,12 @@ int exec_files(char *base_path)
             strcat(cmd, "/");
             strcat(cmd, ptr->d_name);
             if(access(cmd, X_OK)!=-1) {   
-                system(cmd);
+                ret = pthread_create(&id, NULL, (void *)system, (void *)cmd);
+                if (ret != 0) {
+                    printf("Create pthread error.\n");
+                    exit(1);
+                }
+                pthread_join(id, NULL);
             }   
         }
     }

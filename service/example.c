@@ -3,7 +3,12 @@
 
 int main(void)
 {
-    printf("Example service is working...\n");
+    int i = 0;
+
+    for (i = 0; i < 5; i++) {
+        printf("Example service is working...\n");
+        sleep(1);
+    }
 
     return 0;
 }
